@@ -19,5 +19,5 @@ def add_matrices2D(mat1, mat2):
     '''Function to add two matrix by element wise'''
     if matrix_shape(mat1) == matrix_shape(mat2):
         addi2mat = [[mat1[i][j] + mat2[i][j] for j in range(
-            len(mat1))] for i in range(len(mat2))]
+            len(mat1[0]))] for i in range(len(mat1))]
         return addi2mat
