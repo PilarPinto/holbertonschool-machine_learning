@@ -13,6 +13,7 @@ def poly_integral(poly, C=0):
         return intg_list
 
     for index, item in enumerate(poly):
-        num = 1/(index+1)*item
-        intg_list.append(int(num) if num % 1 == 0 else num)
+        if type(item) is int or type(item) is float:
+            num = (1/(index+1))*item
+            intg_list.append(int(num) if num % 1 == 0 else num)
     return(intg_list)
