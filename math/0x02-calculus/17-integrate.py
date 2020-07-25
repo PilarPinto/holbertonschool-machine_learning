@@ -9,13 +9,10 @@ def poly_integral(poly, C=0):
         return None
 
     intg_list = [C]
-    
     if sum(poly) == 0:
         return intg_list
 
-    
     for index, item in enumerate(poly):
-        int_num = 1/(index+1)
-        num = int_num*item
-        intg_list.append(int(num) if num.is_integer() else num)
+        num = 1/(index+1)*item
+        intg_list.append(int(num) if num % 1 == 0 else num)
     return(intg_list)
