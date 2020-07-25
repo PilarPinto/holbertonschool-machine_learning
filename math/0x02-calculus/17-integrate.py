@@ -9,11 +9,14 @@ def poly_integral(poly, C=0):
         return None
 
     intg_list = [C]
-    if sum(poly) == 0:
-        return intg_list
 
     for index in range(len(poly)):
+        if sum(poly) == 0:
+            return intg_list
+
         if type(poly[index]) is int or type(poly[index]) is float:
             num = (1/(index+1))*(poly[index])
             intg_list.append(int(num) if num % 1 == 0 else num)
-    return(intg_list)
+        else:
+            return None
+        return(intg_list)
