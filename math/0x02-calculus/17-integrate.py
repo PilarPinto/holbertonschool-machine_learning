@@ -5,7 +5,7 @@
 def poly_integral(poly, C=0):
     '''Polynomial integrate'''
 
-    if type(poly) is not list or len(poly) is 0 or type(C) is not int:
+    if type(poly) is not list or len(poly) == 0 or type(C) is not int:
         return None
 
     intg_list = [C]
