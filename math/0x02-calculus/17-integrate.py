@@ -11,12 +11,11 @@ def poly_integral(poly, C=0):
     intg_list = [C]
 
     for index in range(len(poly)):
-        if sum(poly) == 0:
-            return intg_list
-
-        if type(poly[index]) is int or type(poly[index]) is float:
-            num = (1/(index+1))*(poly[index])
-            intg_list.append(int(num) if num % 1 == 0 else num)
-        else:
+        if type(poly[index]) is not int and type(poly[index]) is not float:
             return None
-        return(intg_list)
+        if sum(poly) == 0:
+            continue
+
+        num = (1/(index+1))*(poly[index])
+        intg_list.append(int(num) if num % 1 == 0 else num)
+    return(intg_list)
