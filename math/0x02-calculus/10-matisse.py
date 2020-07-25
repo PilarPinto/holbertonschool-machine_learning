@@ -3,8 +3,10 @@
 
 
 def poly_derivative(poly):
-    '''Polynomil derivate'''
+    '''Polynomial derivate'''
     der_list = []
+    if (len(poly) == 1):
+        return('[0]')
     if (isinstance(poly, list) and len(poly) > 0):
         for index, item in enumerate(poly):
             num = index*item
