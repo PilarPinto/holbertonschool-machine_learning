@@ -15,7 +15,6 @@ def poly_integral(poly, C=0):
             return None
         if sum(poly) == 0:
             continue
-
-        num = (1/(index+1))*(poly[index])
+        num = poly[index] / (index + 1)
         intg_list.append(int(num) if num % 1 == 0 else num)
     return(intg_list)
