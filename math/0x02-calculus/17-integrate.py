@@ -8,7 +8,7 @@ def poly_integral(poly, C=0):
     if type(poly) is not list or len(poly) is 0 or type(C) is not int:
         return None
 
-    if poly == [0]:
+    if sum(poly) == 0:
         return [C]
 
     intg_list = []
