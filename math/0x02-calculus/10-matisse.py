@@ -6,11 +6,11 @@ def poly_derivative(poly):
     '''Polynomial derivate'''
     der_list = []
 
-    if (not isinstance(poly, list) and len(poly) == 0):
+    if type(poly) is not list or len(poly) is 0:
         return None
-    
+
     if (len(poly) == 1):
-        return('[0]')
+        return'[0]'
 
     if (isinstance(poly, list) and len(poly) > 0):
         for index, item in enumerate(poly):
