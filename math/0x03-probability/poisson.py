@@ -21,3 +21,16 @@ class Poisson:
             else:
                 lambtha = sum(data) / len(data)
                 self.lambtha = float(lambtha)
+
+    def pmf(self, k):
+        '''Definition of the PMF formula'''
+        e = 2.71828
+        facto_k = 1
+        if (k % 1 != 0):
+            k = int(k)
+        if k <= 0:
+            return 0
+        for ind in range(1, k+1):
+            facto_k = facto_k * ind
+        pmf = ((e**-self.lambtha)*(self.lambtha**k))/facto_k
+        return pmf
