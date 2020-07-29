@@ -23,7 +23,7 @@ class Poisson:
                 self.lambtha = float(lambtha)
 
     def pmf(self, k):
-        '''Definition of the PMF formula'''
+        '''Definition of the PMF formula with lambtha'''
         e = 2.71828
         facto_k = 1
         k = int(k)
