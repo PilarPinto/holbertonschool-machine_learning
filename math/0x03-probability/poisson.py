@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+'''Poisson file-Probabilty Distribution'''
+
+
 class Poisson:
     '''
     Class poisson find mean
@@ -12,7 +15,7 @@ class Poisson:
             else:
                 self.lambtha = float(lambtha)
         else:
-            if type(data) is not list:
+            if not isinstance(data, list):
                 raise TypeError('data must be a list')
             elif len(data) < 2:
                 raise ValueError('data must contain multiple values')
