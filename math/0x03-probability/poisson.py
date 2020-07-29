@@ -24,7 +24,7 @@ class Poisson:
 
     def pmf(self, k):
         '''Definition of the PMF formula with lambtha'''
-        e = 2.71828
+        e = 2.7182818285
         facto_k = 1
         k = int(k)
         if k <= 0:
