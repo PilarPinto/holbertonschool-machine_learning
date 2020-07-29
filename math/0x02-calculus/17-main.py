@@ -22,3 +22,5 @@ poly = [0, 0, 2, 0]
 print(poly_integral(poly, 0))
 poly = [0, 2]
 print(poly_integral(poly, 0))
+poly = [0, 0, 1.7, 0]
+print(poly_integral(poly, 0))
