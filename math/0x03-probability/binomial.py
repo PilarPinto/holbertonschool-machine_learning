@@ -58,8 +58,9 @@ class Binomial:
     def cdf(self, k):
         '''Definition of cumulative density function binomial'''
         k = int(k)
+        cdf = 0
         if k < 0:
             return 0
         for ind in range(k + 1):
-            cdf = self.pmf(ind)
+            cdf += self.pmf(ind)
         return cdf
