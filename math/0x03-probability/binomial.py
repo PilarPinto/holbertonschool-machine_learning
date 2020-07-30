@@ -36,6 +36,9 @@ class Binomial:
 
     def pmf(self, k):
         '''Definition of probability density function'''
+        if k <= 0:
+            return 0
+        k = int(k)
         n_fac = Binomial.factor(self.n)
         k_fac = Binomial.factor(k)
         nk_fac = Binomial.factor(self.n-k)
