@@ -29,3 +29,13 @@ class Normal:
                 stddev = sigm**(1/2)
                 self.mean = float(mean)
                 self.stddev = float(stddev)
+
+    def z_score(self, x):
+        '''z-score formula'''
+        z_score = (x - self.mean) / (self.stddev)
+        return z_score
+
+    def x_value(self, z):
+        '''x_value formula'''
+        x_value = z * (self.stddev) + self.mean
+        return x_value
