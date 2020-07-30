@@ -48,3 +48,15 @@ class Normal:
         expon = ((x - self.mean)**2/(2*(self.stddev**2)))
         pdf = first_div * (e**(-expon))
         return pdf
+
+    def cdf(self, x):
+        '''The density function'''
+        pi = 3.1415926536
+        e = 2.7182818285
+
+        ef = (x - self.mean) / (self.stddev * (2**(1/2)))
+        sqrt_pi = (2/(pi**(1/2)))
+        erf_out = sqrt_pi * (ef - ((ef**3)/3) + ((
+            ef**5)/10) - ((ef**7)/42) + ((ef**9)/216))
+        cdf = (1/2)*(1 + erf_out)
+        return cdf
