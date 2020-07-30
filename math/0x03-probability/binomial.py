@@ -61,6 +61,5 @@ class Binomial:
         if k < 0:
             return 0
         for ind in range(k + 1):
-            sum_cdf = Binomial.pmf(ind)
-        cdf = sum_cdf
+            cdf = self.pmf(ind)
         return cdf
