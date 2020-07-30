@@ -33,3 +33,23 @@ class Poisson:
             facto_k = facto_k * ind
         pmf = ((e**-self.lambtha)*(self.lambtha**k))/facto_k
         return pmf
+
+    def cdf(self, k):
+        '''Definition of the PMF formula with lambtha'''
+        e = 2.7182818285
+        acum = 0
+        k = int(k)
+        if k <= 0:
+            return 0
+
+        for a in range(k + 1):
+            acum += ((self.lambtha**a)/Poisson.factor(a))
+        cdf = (e**-self.lambtha) * acum
+        return cdf
+
+    def factor(number):
+        '''Factorial outside of function'''
+        facto_k = 1
+        for ind in range(1, number+1):
+            facto_k = facto_k * ind
+        return facto_k
