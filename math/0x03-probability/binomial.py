@@ -54,3 +54,13 @@ class Binomial:
         for ind in range(1, number + 1):
             facto_k = facto_k * ind
         return facto_k
+
+    def cdf(self, k):
+        '''Definition of cumulative density function binomial'''
+        k = int(k)
+        if k < 0:
+            return 0
+        for ind in range(k + 1):
+            sum_cdf = Binomial.pmf(ind)
+        cdf = sum_cdf
+        return cdf
