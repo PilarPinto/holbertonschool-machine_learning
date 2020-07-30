@@ -39,3 +39,12 @@ class Normal:
         '''x_value formula'''
         x_value = z * (self.stddev) + self.mean
         return x_value
+
+    def pdf(self, x):
+        '''The density function'''
+        pi = 3.1415926536
+        e = 2.7182818285
+        first_div = 1 / (self.stddev * (2 * pi)**(1/2))
+        expon = ((x - self.mean)**2/(2*(self.stddev**2)))
+        pdf = first_div * (e**(-expon))
+        return pdf
