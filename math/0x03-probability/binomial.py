@@ -33,3 +33,21 @@ class Binomial:
                 p = mean / n
                 self.n = int(n)
                 self.p = float(p)
+
+    def pmf(self, k):
+        '''Definition of probability density function'''
+        n_fac = Binomial.factor(self.n)
+        k_fac = Binomial.factor(k)
+        nk_fac = Binomial.factor(self.n-k)
+        q = 1 - self.p
+
+        bin_coeff = (n_fac)/(k_fac * nk_fac)
+        pmf = bin_coeff * (self.p**k) * (q**(self.n-k))
+        return pmf
+
+    def factor(number):
+        '''Factorial outside of function'''
+        facto_k = 1
+        for ind in range(1, number + 1):
+            facto_k = facto_k * ind
+        return facto_k
