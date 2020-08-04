@@ -54,6 +54,7 @@ class Neuron:
         return (ev, cost)
 
     def gradient_descent(self, X, Y, A, alpha=0.05):
+        '''Neuron Gradient Descent'''
         m = Y.shape[1]
         loss = A - Y
         gradient = (1/m) * np.matmul(X, loss.T)
