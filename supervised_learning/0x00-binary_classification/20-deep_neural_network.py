@@ -67,7 +67,7 @@ class DeepNeuralNetwork:
 
     def evaluate(self, X, Y):
         '''Evaluates the neuron’s predictions'''
-        A2, A3 = self.forward_prop(X)
+        A3, self.__cache = self.forward_prop(X)
         ev = np.where(self.__cache['A3'] >= 0.5, 1, 0)
         cost = self.cost(Y, self.__cache['A3'])
         return (ev, cost)
