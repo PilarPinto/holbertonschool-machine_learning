@@ -22,7 +22,7 @@ class DeepNeuralNetwork:
         self.weights = {}
 
         for l in range(len(layers)):
-            if layers[l] < 0:
+            if layers[l] <= 0 or type(layers[l]) is not int:
                 raise ValueError('layers must be a list of positive integers')
 
             he_al = np.random.randn(layers[l], nx) * np.sqrt(2 / nx)
