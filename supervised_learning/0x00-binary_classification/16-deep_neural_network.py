@@ -20,6 +20,7 @@ class DeepNeuralNetwork:
         self.L = len(layers)
         self.cache = {}
         self.weights = {}
+        self.nx = nx
 
         for l in range(self.L):
             if type(layers[l]) is not int or layers[l] <= 0:
