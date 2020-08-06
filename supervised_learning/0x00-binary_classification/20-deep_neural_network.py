@@ -51,12 +51,13 @@ class DeepNeuralNetwork:
         mul_Z1 = (np.matmul(self.__weights['W1'],
                             self.__cache['A0'])) + self.__weights['b1']
         self.__cache['A1'] = 1 / (1 + np.exp(- mul_Z1))
+
         for l in range(self.L-1):
             mul_Z = (np.matmul(self.__weights['W' + str(l+2)], self.__cache[
                 'A' + str(l+1)])) + self.__weights['b' + str(l+2)]
             self.__cache['A' + str(l+2)] = 1 / (1 + np.exp(- mul_Z))
 
-        return self.__cache['A3'], self.__cache
+        return self.__cache['A' + str(self.L)], self.__cache
 
     def cost(self, Y, A):
         '''Logisting regression cost'''
@@ -68,6 +69,6 @@ class DeepNeuralNetwork:
     def evaluate(self, X, Y):
         '''Evaluates the neuron’s predictions'''
         A, self.__cache = self.forward_prop(X)
-        cost = self.cost(Y, A)
         ev = np.where(A >= 0.5, 1, 0)
+        cost = self.cost(Y, A)
         return (ev, cost)
