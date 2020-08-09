@@ -74,8 +74,7 @@ class DeepNeuralNetwork:
         return (ev, cost)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
-        '''Neural network Gradient Descent'''
-        '''
+        '''Neural network Gradient Descent
         m = Y.shape[1]
         A3c = self.__cache['A' + str(self.L)]
         A2c = self.__cache['A' + str(self.L-1)]
@@ -113,9 +112,9 @@ class DeepNeuralNetwork:
             Ancp = self.__cache['A' + str(layer-1)]
             Wn = self.__weights['W' + str(layer)]
 
-            if layer == 3:
+            if layer == self.L:
                 dZc = self.__cache['A' + str(self.L)] - Y
-            if layer < 3:
+            if layer < self.L:
                 dZc = dZcur * (Anc * (1-Anc))
 
             dw_c = (1 / m) * np.matmul(dZc, Ancp.T)
