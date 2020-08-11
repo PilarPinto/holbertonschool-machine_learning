@@ -146,7 +146,7 @@ class DeepNeuralNetwork:
         ext = os.path.splitext(filename)[-1]
 
         if ext != '.pkl':
-            os.rename(filename, filename + '.pkl')
+            filename = filename + '.pkl'
 
         fileObject = open(filename, 'wb')
         pickle.dump(self, fileObject)
