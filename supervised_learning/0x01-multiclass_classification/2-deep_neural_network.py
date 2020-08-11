@@ -120,7 +120,7 @@ class DeepNeuralNetwork:
         x_iteration = []
         y_cost = []
 
-        for ind in range(iterations + 1):
+        for ind in range(iterations):
             A, self.__cache = self.forward_prop(X)
             self.gradient_descent(Y, self.__cache, alpha)
             cost = self.cost(Y, A)
@@ -145,21 +145,19 @@ class DeepNeuralNetwork:
         '''Saves the instance object to a file '''
         ext = os.path.splitext(filename)[-1]
 
+        if ext != '.pkl':
+            os.rename(filename, filename + '.pkl')
+
         fileObject = open(filename, 'wb')
         pickle.dump(self, fileObject)
         fileObject.close()
 
-        if ext != '.pkl':
-            filename = filename + '.pkl'
-
     @staticmethod
     def load(filename):
         '''Loads a pickled DeepNeuralNetwork object'''
-        if os.path.isfile(filename) == False:
+        try:
+            fileObject = open(filename, 'rb')
+            b = pickle.load(fileObject)
+            return b
+        except OSError as e:
             return None
-        if not filename:
-            return None
-
-        fileObject = open(filename, 'rb')
-        b = pickle.load(fileObject)
-        return b
