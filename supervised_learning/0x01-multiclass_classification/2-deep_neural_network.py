@@ -152,6 +152,7 @@ class DeepNeuralNetwork:
         if ext != '.pkl':
             filename = filename + '.pkl'
 
+    @staticmethod
     def load(filename):
         '''Loads a pickled DeepNeuralNetwork object'''
         if not os.path.isfile(filename) or not filename:
