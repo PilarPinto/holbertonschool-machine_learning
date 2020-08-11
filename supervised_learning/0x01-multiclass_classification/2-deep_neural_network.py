@@ -154,7 +154,7 @@ class DeepNeuralNetwork:
 
     def load(filename):
         '''Loads a pickled DeepNeuralNetwork object'''
-        if not os.path.isfile(filename) or if not filename:
+        if not os.path.isfile(filename) or not filename:
             return None
 
         fileObject = open(filename, 'rb')
