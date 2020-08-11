@@ -142,7 +142,7 @@ class DeepNeuralNetwork:
         return (self.evaluate(X, Y))
 
     def save(self, filename):
-        '''Saves the instance object to a file '''
+        '''Saves the instance and write a pickle file '''
         ext = os.path.splitext(filename)[-1]
 
         if ext != '.pkl':
