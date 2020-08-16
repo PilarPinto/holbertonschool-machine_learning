@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 '''Actions neural network classifier file'''
 
-import numpy as np
 import tensorflow as tf
 
 calculate_accuracy = __import__('3-calculate_accuracy').calculate_accuracy
@@ -48,5 +47,6 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print('\tTraining Accuracy: {}'.format(t_accur))
                 print('\tValidation Cost: {}'.format(v_cost))
                 print('\tValidation Accuracy: {}'.format(v_accur))
+                sess.run(train_op)
         path = saver.save(sess, save_path)
     return path
