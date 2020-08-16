@@ -33,9 +33,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
 
     saver = tf.train.Saver()
     with tf.Session() as sess:
-
+        sess.run(tf.global_variables_initializer())
         for ind in range(iterations + 1):
-            sess.run(tf.global_variables_initializer())
             t_cost = sess.run(loss, feed_dict={x: X_train, y: Y_train})
             t_accur = sess.run(accur, feed_dict={x: X_train, y: Y_train})
             v_cost = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
@@ -47,6 +46,6 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print('\tTraining Accuracy: {}'.format(t_accur))
                 print('\tValidation Cost: {}'.format(v_cost))
                 print('\tValidation Accuracy: {}'.format(v_accur))
-                sess.run(train_op)
+            sess.run(train_op, feed_dict={x: X_train, y: Y_train})
         path = saver.save(sess, save_path)
     return path
