@@ -46,6 +46,7 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
                 print('\tTraining Accuracy: {}'.format(t_accur))
                 print('\tValidation Cost: {}'.format(v_cost))
                 print('\tValidation Accuracy: {}'.format(v_accur))
-            sess.run(train_op, feed_dict={x: X_train, y: Y_train})
-        save_path = saver.save(sess, save_path)
-    return save_path
+            if ind < iterations:
+                sess.run(train_op, feed_dict={x: X_train, y: Y_train})
+        path = saver.save(sess, save_path)
+    return path
