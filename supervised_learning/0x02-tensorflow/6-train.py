@@ -22,8 +22,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
     y_pred = forward_prop(x, layer_sizes, activations)
     tf.add_to_collection('y_pred', y_pred)
 
-    accur = calculate_accuracy(y, y_pred)
-    tf.add_to_collection('accur', accur)
+    accuracy = calculate_accuracy(y, y_pred)
+    tf.add_to_collection('accuracy', accuracy)
 
     loss = calculate_loss(y, y_pred)
     tf.add_to_collection('loss', loss)
@@ -36,9 +36,9 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations,
         sess.run(tf.global_variables_initializer())
         for ind in range(iterations + 1):
             t_cost = sess.run(loss, feed_dict={x: X_train, y: Y_train})
-            t_accur = sess.run(accur, feed_dict={x: X_train, y: Y_train})
+            t_accur = sess.run(accuracy, feed_dict={x: X_train, y: Y_train})
             v_cost = sess.run(loss, feed_dict={x: X_valid, y: Y_valid})
-            v_accur = sess.run(accur, feed_dict={x: X_valid, y: Y_valid})
+            v_accur = sess.run(accuracy, feed_dict={x: X_valid, y: Y_valid})
 
             if (ind % 100 == 0) or (ind == iterations) or (ind == 0):
                 print('After {} iterations:'.format(ind))
