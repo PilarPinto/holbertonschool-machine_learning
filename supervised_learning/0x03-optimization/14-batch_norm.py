@@ -6,7 +6,7 @@ import tensorflow as tf
 def create_batch_norm_layer(prev, n, activation):
     '''Normalization upgraded with tf'''
     ker_i = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-    layer = tf.layers.Dense(units=n, kernel_initializer='ker_i').apply(prev)
+    layer = tf.layers.Dense(units=n, kernel_initializer=ker_i).apply(prev)
 
     mean, var = tf.nn.moments(layer, axes=[0])
     beta = tf.Variable(tf.constant(0.0, shape=[n]), True)
