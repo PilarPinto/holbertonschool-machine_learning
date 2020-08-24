@@ -11,9 +11,9 @@ def update_variables_Adam(alpha, beta1, beta2,
     n_moment = (beta1 * v) + ((1 - beta1) * grad)
     s_moment = (beta2 * s) + ((1 - beta2) * grad**2)
 
-    v_corr = n_moment / (1 - beta1 ** t)
-    s_corr = s_moment / (1 - beta2 ** t)
+    v_corr = n_moment / (1 - (beta1 ** t))
+    s_corr = s_moment / (1 - (beta2 ** t))
 
-    v_s = v_corr / ((s_corr**0.5) + epsilon)
-    up_var = var - (alpha * v_s)
-    return(up_var, n_moment, n_moment)
+    v_s = v_corr / ((s_corr ** 0.5) + epsilon)
+    var -= (alpha * v_s)
+    return(var, n_moment, s_moment)
