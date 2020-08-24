@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 '''File of the normalization constants'''
+import numpy as np
 
 
 def normalization_constants(X):
