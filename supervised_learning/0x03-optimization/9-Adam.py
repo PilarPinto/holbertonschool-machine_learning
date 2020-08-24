@@ -16,4 +16,4 @@ def update_variables_Adam(alpha, beta1, beta2,
 
     v_s = v_corr / ((s_corr**0.5) + epsilon)
     up_var = var - (alpha * v_s)
-    return up_var, n_moment, n_moment
+    return(up_var, n_moment, n_moment)
