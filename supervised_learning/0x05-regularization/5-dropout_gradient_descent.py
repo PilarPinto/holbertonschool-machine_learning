@@ -1,37 +1,28 @@
 #!/usr/bin/env python3
-'''updates the weights of a NN with Dropout regularization'''
+'''File for droput w and b of a NN'''
 import numpy as np
 
 
 def dropout_gradient_descent(Y, weights, cache, alpha, keep_prob, L):
-    '''Dropout regularization'''
+    '''Dropout w and b of NN with gradient descent'''
 
     Z = cache['A' + str(L)]
-    dz = Z - Y
+    dZ = Z - Y
     m = Y.shape[1]
 
     for layer in reversed(range(1, L + 1)):
-        weight_k = 'W'+str(layer)
-        bias_k = 'b'+str(layer)
-        Z_k = 'A'+str(layer)
-        Z1_k = 'A'+str(layer - 1)
-        D_k = 'D'+str(layer)
-
-        Z = cache[Z_k]
+        Z = cache['A' + str(layer)]
         dz2 = 1 - (Z**2)
-
         if layer == L:
-            dZl = dz
+            dZ = dZ
         else:
-            dZl = dz * dz2
-            dZl *= cache[D_k] / keep_prob
+            dZ = dZ * dz2
+            dZ *= cache['D' + str(layer)] / keep_prob
 
-        weight = weights[weight_k]
-        dz1 = cache[Z1_k]
-
-        d_weight = (1/m) * np.matmul(dZl, dz1.T)
-        d_bias = (1/m) * np.sum(dZl, axis=1, keepdims=True)
-        dz = np.matmul(weight.T, dZl)
-
-        weights[weight_k] = weights[weight_k] - alpha + d_weight
-        weights[bias_k] = weights[bias_k] - alpha + d_bias
+        Wgt = weights['W' + str(layer)]
+        Z1 = cache['A' + str(layer - 1)]
+        dWgt = (1 / m) * np.matmul(dZ, Z1.T)
+        db = (1 / m) * np.sum(dZ, axis=1, keepdims=True)
+        dZ = np.matmul(Wgt.T, dZ)
+        weights['W' + str(layer)] = weights['W' + str(layer)] - alpha * dWgt
+        weights['b' + str(layer)] = weights['b' + str(layer)] - alpha * db
