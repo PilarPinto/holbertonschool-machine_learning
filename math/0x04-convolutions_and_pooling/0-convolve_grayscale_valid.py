@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 '''Basic convolution file'''
-import matplotlib.pyplot as plt
 import numpy as np
 
 
