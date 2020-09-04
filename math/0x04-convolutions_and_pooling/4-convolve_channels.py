@@ -17,8 +17,8 @@ def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
         pw = int(((w - 1) * sw + kw - w) / 2) + 1
     if padding == 'valid':
         ph, pw = 0, 0
-        if type(padding) is tuple:
-            ph, pw = padding
+    if type(padding) is tuple:
+        ph, pw = padding
 
     h_conv = int(((h - kh + (2 * ph)) / sh) + 1)
     w_conv = int(((w - kw + (2 * pw)) / sw) + 1)
