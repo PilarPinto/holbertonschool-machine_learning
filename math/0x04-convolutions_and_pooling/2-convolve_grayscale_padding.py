@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 '''File performs conv with padding'''
-import matplotlib.pyplot as plt
 import numpy as np
 
 
