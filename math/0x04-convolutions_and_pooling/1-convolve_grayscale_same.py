@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 ''' performs a same convolution on grayscale images'''
-import matplotlib.pyplot as plt
 import numpy as np
 
 
