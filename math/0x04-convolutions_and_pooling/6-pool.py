@@ -27,7 +27,7 @@ def pool(images, kernel_shape, stride, mode='max'):
             if mode == 'max':
                 out_coord = np.max(img_wise, axis=(1, 2))
 
-            elif mode == 'avg':
+            if mode == 'avg':
                 out_coord = np.mean(img_wise, axis=(1, 2))
 
                 convol_img[image, i, j] = out_coord
