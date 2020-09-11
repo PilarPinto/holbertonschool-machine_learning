@@ -21,11 +21,11 @@ def pool_forward(A_prev, kernel_shape, stride=(1, 1), mode='max'):
         for j in range(w_conv):
             img = A_prev[image, i*sh:kh+(i*sh), j*sw:kw+(j*sw)]
 
-        if mode == 'max':
-            out_coord = np.max(img, axis=(1, 2))
-        if mode == 'avg':
-            out_coord = np.mean(img, axis=(1, 2))
+            if mode == 'max':
+                out_coord = np.max(img, axis=(1, 2))
+            if mode == 'avg':
+                out_coord = np.mean(img, axis=(1, 2))
 
-        convol_img[image, i, j] = out_coord
+            convol_img[image, i, j] = out_coord
 
     return convol_img
