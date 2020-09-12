@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 ''' builds a modified version of the LeNet-5 architecture File'''
+
 import tensorflow as tf
 
 
@@ -21,7 +22,7 @@ def lenet5(x, y):
                                activation=activation,
                                kernel_initializer=k_init)(pool_1)
 
-    pool_2 = tf.layers.MaxPooling2D(pool_size=[2, 2],
+    pool_2 = tf.layers.MaxPooling2D(pool_size=2,
                                     strides=2)(layer_2)
 
     flatten = tf.layers.Flatten()(pool_2)
@@ -37,12 +38,12 @@ def lenet5(x, y):
 
     y_out = tf.nn.softmax(output_layer)
 
+    equality = tf.equal(tf.argmax(y,1),
+                        tf.argmax(output_layer, axis=1))
+    acc = tf.reduce_mean(tf.cast(equality, tf.float32))
+
     loss = tf.losses.softmax_cross_entropy(y, output_layer)
 
     train = tf.train.AdamOptimizer().minimize(loss)
 
-    equality = tf.equal(tf.argmax(y, axis=1),
-                        tf.argmax(output_layer, axis=1))
-    acc = tf.reduce_mean(tf.cast(equality, tf.float32))
-
-    return y_out, train, loss, acc
+    return(y_out, train, loss, acc)
