@@ -15,26 +15,28 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
         ph, pw = 0, 0
 
     if padding == 'same':
-        ph = max((h_prev - 1) * sh + kh - h_prev, 0)
-        pw = max((w_prev - 1) * sw + kw - w_prev, 0)
-        ph = -(-ph // 2)
-        pw = -(-pw // 2)
+        ph = int(np.ceil(max((h_prev - 1) * sh + kh - h_prev, 0) / 2))
+        pw = int(np.ceil(max((w_prev - 1) * sw + kw - w_prev, 0) / 2))
+        A_prev = np.pad(A_prev, pad_width=((0, 0), (ph, ph), (pw, pw), (0, 0)),
+                        mode='constant', constant_values=0)
 
     dW = np.zeros(W.shape)
     dA_prev = np.zeros(A_prev.shape)
-    db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
+    db = np.zeros(b.shape)
+    db[:, :, 0, :] = np.sum(dZ, axis=(0, 1, 2))
 
-    for i_m in range(m):
-        for i in range(h_new):
-            for j in range(w_new):
+    for i in range(m):
+        for h in range(h_new):
+            for w in range(w_new):
                 for cn in range(c_new):
-                    W_z = W[..., cn]
-                    Z_z = dZ[i_m, i, j, cn]
-                    dA_prev[i_m, i * sh:kh + (i * sh), j * sw:kw +
-                            (j * sw)] += (W_z * Z_z)
-                    dW[..., cn] += (A_prev[i_m, i * sh:kh + (i * sh),
-                                           j * sw:kw + (j * sw)] * Z_z)
+                    aux_W = W[:, :, :, cn]
+                    aux_dZ = dZ[i, h, w, cn]
+                    dA_prev[i,
+                            h * sh:kh + (h * sh),
+                            w * sw:kw + (w * sw)] += (aux_W * aux_dZ)
+                    dW[:, :, :, cn] += (A_prev[i, h * sh:kh + (h * sh),
+                                        w * sw:kw + (w * sw)] * aux_dZ)
 
-    _, hd, wd, _ = dA_prev.shape
-    dA_prev = dA_prev[:, ph:hd-ph, pw:wd-pw, :]
+    _, h_dA, w_dA, _ = dA_prev.shape
+    dA_prev = dA_prev[:, ph:h_dA-ph, pw:w_dA-pw, :]
     return dA_prev, dW, db
