@@ -20,17 +20,8 @@ def conv_backward(dZ, A_prev, W, b, padding="same", stride=(1, 1)):
         ph = -(-ph // 2)
         pw = -(-pw // 2)
 
-    h_conv = int(((h_prev - kh + (2 * ph)) / sh) + 1)
-    w_conv = int(((w_prev - kw + (2 * pw)) / sw) + 1)
-    convol_img = np.zeros((m, h_conv, w_conv, c_new))
-
-    image = np.arange(0, m)
-    image_pad = np.pad(A_prev, [(0, 0), (ph, ph), (pw, pw), (0, 0)],
-                       mode='constant')
-
     dW = np.zeros(W.shape)
     dA_prev = np.zeros(A_prev.shape)
-    db = np.zeros(b.shape)
     db = np.sum(dZ, axis=(0, 1, 2), keepdims=True)
 
     for i_m in range(m):
