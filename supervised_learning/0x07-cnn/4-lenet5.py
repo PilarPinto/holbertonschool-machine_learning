@@ -1,6 +1,5 @@
 #!/usr/bin/env ptyhon3
 ''' builds a modified version of the LeNet-5 architecture File'''
-import numpy as np
 import tensorflow as tf
 
 
