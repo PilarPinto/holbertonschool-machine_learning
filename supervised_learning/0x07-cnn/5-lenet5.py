@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 '''builds a modified version of the LeNet-5 arch keras '''
 
-import numpy as np
-import tensorflow as tf
 import tensorflow.keras as K
 
 
