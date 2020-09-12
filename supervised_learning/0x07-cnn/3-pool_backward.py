@@ -10,19 +10,25 @@ def pool_backward(dA, A_prev, kernel_shape, stride=(1, 1), mode='max'):
     kh, kw = kernel_shape
     sh, sw = stride
 
-    dA_prev = np.zeros_like(A_prev)
-    for ind_m in range(m):
-        for i in range(h_new):
-            for j in range(w_new):
-                for ci in range(c_new):
-                    prev = A_prev[ind_m, i*sh:kh+(i*sh), j*sw:kw+(j*sw), ci]
-                    filter = (prev == np.max(prev))
+    h_convol = int(float(h_prev - kh) / float(sh)) + 1
+    w_convol = int(float(w_prev - kw) / float(sw)) + 1
+
+    dA_prev = np.zeros(A_prev.shape)
+
+    for i in range(m):
+        for y in range(h_convol):
+            for x in range(w_convol):
+                for ch in range(c):
+                    A = dA[i, y, x, ch]
+                    image = A_prev[i, y * sh:y * sh + kh,
+                                   x * sw:x * sw + kw, ch]
                     if mode == 'max':
-                        dA_prev[ind_m, i*sh:kh+(i*sh),
-                                j*sw:kw+(j*sw), ci] += dA[ind_m,
-                                                          i, j, ci] * filter
-                    if mode == 'avg':
-                        dA_prev[ind_m, i*sh:kh+(i*sh),
-                                j*sw:kw+(j*sw), ci] += (dA[ind_m,
-                                                           j, w, ci])/kh/kw
-    return dA_prev
+                        res = (image == np.max(image))
+                        dA_prev[i, y * sh:y * sh + kh,
+                                x * sw:x * sw + kw, ch] += A * res
+                    elif mode == 'avg':
+                        res = A / kh / kw
+                        dA_prev[i, y * sh:y * sh + kh,
+                                x * sw:x * sw + kw, ch] += np.ones((
+                                    kh, kw)) * res
+    return(dA_prev)
