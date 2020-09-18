@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-'''File to build a transition layer '''
+'''File to create atransition layer '''
 import tensorflow.keras as K
 
 
