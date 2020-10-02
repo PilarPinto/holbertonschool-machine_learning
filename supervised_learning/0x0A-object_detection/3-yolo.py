@@ -136,7 +136,7 @@ class Yolo:
         return (filtered_boxes, box_classes, box_scores)
 
     def _intersectionou(self, filtered_boxes, thresh, scores):
-
+        '''Compute intersection'''
         x1 = filtered_boxes[:, 0]
         y1 = filtered_boxes[:, 1]
         x2 = filtered_boxes[:, 2]
