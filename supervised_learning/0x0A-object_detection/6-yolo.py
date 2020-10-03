@@ -204,7 +204,7 @@ class Yolo:
             c_blue = (255, 0, 0)
 
             type_cls = self.class_names[box_classes[i]]
-            accu_score = np.round(box_scores[i], 2)
+            accu_score = '{:0.2f}'.format(box_scores[i])
 
             font = cv2.FONT_HERSHEY_SIMPLEX
             img_fit = cv2.rectangle(image, (x1, y1), (x2, y2), c_blue, 2)
